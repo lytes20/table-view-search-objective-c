@@ -9,12 +9,10 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
-    {
-NSMutableArray *categories;
-NSMutableArray *searchResults;
-BOOL isFiltered;
-    }
+    @property (strong, nonatomic) NSMutableArray *categories;
+    @property (strong, nonatomic) NSMutableArray *searchResults;;
+    @property (strong, nonatomic) NSIndexPath *expandedIndexPath;
+    @property (assign) BOOL isFiltered;
 @end
 
 @implementation ViewController
@@ -23,24 +21,24 @@ BOOL isFiltered;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.title = @"Search";
-    categories = [[NSMutableArray alloc] initWithObjects:@"Elela", @"Alela", @"Panquin", @"Danlisha", nil];
+    _categories = [[NSMutableArray alloc] initWithObjects:@"Elela", @"Alela", @"Panquin", @"Danlisha", nil];
     
-    isFiltered = false;
+    _isFiltered = false;
     self.searchBar.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
     
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if(searchText.length == 0){
-        isFiltered = false;
+        _isFiltered = false;
     }else{
-        isFiltered = true;
-        searchResults = [[NSMutableArray alloc] init];
+        _isFiltered = true;
+        _searchResults = [[NSMutableArray alloc] init];
         
-        for(NSString *category in categories){
+        for(NSString *category in _categories){
             NSRange nameRange = [category rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if(nameRange.location != NSNotFound){
-                [searchResults addObject:category];
+                [_searchResults addObject:category];
             }
         }
     }
@@ -49,33 +47,36 @@ BOOL isFiltered;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(isFiltered){
-        return searchResults.count;
+    if(_isFiltered){
+        return _searchResults.count;
     }
-    return categories.count;
+    return _categories.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
    
     
-    if(isFiltered){
+    if(_isFiltered){
         UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"products_cell"];
         UILabel *name = [cell viewWithTag:1];
-        name.text = searchResults[indexPath.row];
+        name.text = _searchResults[indexPath.row];
         return cell;
     }else{
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"item_cell"];
     UILabel *name = [cell viewWithTag:1];
-    name.text = categories[indexPath.row];
+    name.text = _categories[indexPath.row];
         return cell;
     }
     
 }
     
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(isFiltered){
-        return 100;
+    if(_isFiltered){
+        if ([indexPath compare:self.expandedIndexPath] == NSOrderedSame) {
+            return 180; // + moreheight;
+        }
+        return 55;
     }
 
     return 45;
@@ -83,8 +84,23 @@ BOOL isFiltered;
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(isFiltered){
+    if(_isFiltered){
+        [tableView beginUpdates];
         
+        NSIndexPath *oldIndexPath = self.expandedIndexPath;
+        if ([indexPath compare:self.expandedIndexPath] == NSOrderedSame) {
+            self.expandedIndexPath = nil;
+        } else {
+            self.expandedIndexPath = indexPath;
+        }
+        
+        if (oldIndexPath == nil) {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }else {
+            [tableView reloadRowsAtIndexPaths:@[oldIndexPath, indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+        [tableView endUpdates];
     }else{
         [self performSegueWithIdentifier:@"open_second_scene" sender:self];
     }
