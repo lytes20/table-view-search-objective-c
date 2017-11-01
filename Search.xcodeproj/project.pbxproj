@@ -16,6 +16,7 @@
 		C3989E521FA745B20074CDC5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3989E511FA745B20074CDC5 /* main.m */; };
 		C3989E5C1FA745B30074CDC5 /* SearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3989E5B1FA745B30074CDC5 /* SearchTests.m */; };
 		C3989E671FA745B30074CDC5 /* SearchUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3989E661FA745B30074CDC5 /* SearchUITests.m */; };
+		C3989E761FA74CCA0074CDC5 /* SecondSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3989E751FA74CCA0074CDC5 /* SecondSceneViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		C3989E621FA745B30074CDC5 /* SearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3989E661FA745B30074CDC5 /* SearchUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchUITests.m; sourceTree = "<group>"; };
 		C3989E681FA745B30074CDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3989E741FA74CCA0074CDC5 /* SecondSceneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondSceneViewController.h; sourceTree = "<group>"; };
+		C3989E751FA74CCA0074CDC5 /* SecondSceneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondSceneViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 				C3989E401FA745B20074CDC5 /* AppDelegate.m */,
 				C3989E421FA745B20074CDC5 /* ViewController.h */,
 				C3989E431FA745B20074CDC5 /* ViewController.m */,
+				C3989E741FA74CCA0074CDC5 /* SecondSceneViewController.h */,
+				C3989E751FA74CCA0074CDC5 /* SecondSceneViewController.m */,
 				C3989E451FA745B20074CDC5 /* Main.storyboard */,
 				C3989E4B1FA745B20074CDC5 /* Assets.xcassets */,
 				C3989E4D1FA745B20074CDC5 /* LaunchScreen.storyboard */,
@@ -270,6 +275,7 @@
 			files = (
 				C3989E4A1FA745B20074CDC5 /* Search.xcdatamodeld in Sources */,
 				C3989E441FA745B20074CDC5 /* ViewController.m in Sources */,
+				C3989E761FA74CCA0074CDC5 /* SecondSceneViewController.m in Sources */,
 				C3989E521FA745B20074CDC5 /* main.m in Sources */,
 				C3989E411FA745B20074CDC5 /* AppDelegate.m in Sources */,
 			);
